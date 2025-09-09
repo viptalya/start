@@ -3,7 +3,14 @@ package main
 import "fmt"
 
 func main() {
-	EvenNubmer()
+	a := FuncSumWithReturn(5, 6)
+	fmt.Println(a)
+
+	b := FuncSumWithReturnZ(11, 10)
+	fmt.Println(b)
+
+	age, name := FuncReturnNParams(11, 14, "Vitalii", "Podoliak")
+	fmt.Printf("Возраст = %v\nПолное имя = %v\n", age, name)
 }
 
 //Объявление переменных
@@ -220,4 +227,62 @@ func EvenNubmer() {
 			fmt.Printf("index: %d, value: %d - четное\n", i, arrNums[i])
 		}
 	}
+}
+
+//Объявление функции
+/*
+func имя_функции (список_параметров) типы_возвращаемых_значений {
+	тело_функции
+}
+*/
+func FuncSumWithParams(x, y int) {
+	fmt.Println(x + y)
+}
+
+//Функция с неопределенным количеством параметров
+func FuncWithNParams(numbers ...int) {
+	sum := 0
+
+	for _, number := range numbers {
+		sum += number
+	}
+
+	fmt.Println("sum =", sum)
+}
+
+//Передача среза в функцию
+/*
+Чтобы передать срез в функцию необходимо после аргумента-массива указать многоточие
+
+FuncWithNParams([]int{1, 2, 3}...)
+
+или
+
+var nums = []int{5, 6, 7}
+FuncWithNParams(nums...)
+*/
+
+//Возвращение результата из функции
+/*
+func имя_функции (список_параметров) тип возвращаемого_значения {
+	тело_функции
+	return возвращаемое_значение
+}
+*/
+
+func FuncSumWithReturn(x, y int) int {
+	return x + y
+}
+
+//Именованные возвращаемые результаты
+func FuncSumWithReturnZ(x, y int) (z int) {
+	z = x + y
+	return
+}
+
+//Возвращение нескольких результатов
+func FuncReturnNParams(x, y int, firstName, lastName string) (z int, fullName string) {
+	z = x + y
+	fullName = firstName + " " + lastName
+	return
 }
