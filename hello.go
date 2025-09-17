@@ -1,12 +1,16 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"reflect"
+	"sort"
+)
 
 func main() {
-	Demo22()
+	Demo35()
 }
 
-//Объявление переменных
+// Объявление переменных
 func Variables() {
 
 	const n string = "Const c"
@@ -32,7 +36,7 @@ func Variables() {
 	}
 }
 
-//Арифметические операции
+// Арифметические операции
 func Operations() {
 	a := 1.0
 	b := 10.0
@@ -52,7 +56,7 @@ func Operations() {
 	fmt.Println("Деление с остатком", remains)
 }
 
-//Задача CountingSheep
+// Задача CountingSheep
 func Codewars() {
 	arrSheeps := [...]bool{true, true, true, false,
 		true, true, true, true,
@@ -72,7 +76,7 @@ func Codewars() {
 	fmt.Print(countSheeps)
 }
 
-//Массивы
+// Массивы
 func Arrays() {
 
 	//var arr [размерность]тип_данных
@@ -104,7 +108,7 @@ func Arrays() {
 	fmt.Println(arr8)
 }
 
-//Условия
+// Условия
 func Terms() {
 
 	//пример if...else
@@ -158,7 +162,7 @@ func Terms() {
 	*/
 }
 
-//Циклы
+// Циклы
 func Cycles() {
 
 	//Объявления
@@ -232,7 +236,7 @@ func FuncSumWithParams(x, y int) {
 	fmt.Println(x + y)
 }
 
-//Функция с неопределенным количеством параметров
+// Функция с неопределенным количеством параметров
 func FuncWithNParams(numbers ...int) {
 	sum := 0
 
@@ -267,13 +271,13 @@ func FuncSumWithReturn(x, y int) int {
 	return x + y
 }
 
-//Именованные возвращаемые результаты
+// Именованные возвращаемые результаты
 func FuncSumWithReturnZ(x, y int) (z int) {
 	z = x + y
 	return
 }
 
-//Возвращение нескольких результатов
+// Возвращение нескольких результатов
 func FuncReturnNParams(x, y int, firstName, lastName string) (z int, fullName string) {
 	z = x + y
 	fullName = firstName + " " + lastName
@@ -314,7 +318,7 @@ func display(s string) {
 Используется для того, чтобы мы могли переменной присвоить в качестве типа функцию
 */
 
-//Функция для демонтсрации
+// Функция для демонтсрации
 func Demo() {
 
 	//Присваиваем переменной а тип функции FuncSum - func(int, int) int
@@ -359,17 +363,17 @@ func Demo1() {
 	fmt.Println(sumOfPositive)
 }
 
-//Функция проверки четного числа
+// Функция проверки четного числа
 func isEven(n int) bool {
 	return n%2 == 0
 }
 
-//Функция проверки положительного числа
+// Функция проверки положительного числа
 func isPositive(n int) bool {
 	return n > 0
 }
 
-//Функция, которая принимает срез и в соответствии с заданным условием выводит результат
+// Функция, которая принимает срез и в соответствии с заданным условием выводит результат
 func ResultSum(nums []int, criteria func(int) bool) int {
 	result := 0
 
@@ -393,22 +397,22 @@ func Demo2() {
 	fmt.Println(f(3, 4))
 }
 
-//Функция суммирования
+// Функция суммирования
 func sum1(x, y int) int {
 	return x + y
 }
 
-//Функция вычитания
+// Функция вычитания
 func subtract1(x, y int) int {
 	return x - y
 }
 
-//Функция умножения
+// Функция умножения
 func multiply1(x, y int) int {
 	return x * y
 }
 
-//Функция, которая возвращает функцию типа func(int, int) int, в зависимости от n
+// Функция, которая возвращает функцию типа func(int, int) int, в зависимости от n
 func selectFn(n int) func(int, int) int {
 
 	switch n {
@@ -424,7 +428,7 @@ func selectFn(n int) func(int, int) int {
 //Анонимные функции
 //Анонимная функция - используется для определения действия там, где оно применяется, если в коде больше нигде не будет необходимости
 
-//Функция демонстрации анонимной функции
+// Функция демонстрации анонимной функции
 func Demo3() {
 
 	//Анонимная функция
@@ -435,13 +439,13 @@ func Demo3() {
 	fmt.Println(f(5, 6))
 }
 
-//Анонимная функция как аргумент функции
+// Анонимная функция как аргумент функции
 func Demo4() {
 	AnonimAction(5, 6, func(x, y int) int { return x + y })
 	AnonimAction(1, 10, func(x, y int) int { return x - y })
 }
 
-//Функция получает переменные и функцию, которая будет работать с переменными
+// Функция получает переменные и функцию, которая будет работать с переменными
 func AnonimAction(x, y int, operation func(int, int) int) {
 	result := operation(x, y)
 	fmt.Println(result)
@@ -455,7 +459,7 @@ func Demo5() {
 	fmt.Println(f(5, 6))
 }
 
-//Анонимные функции являются результатом выполнения этой функции
+// Анонимные функции являются результатом выполнения этой функции
 func SelectAnonimFn(n int) func(int, int) int {
 	if n == 1 {
 		return func(x, y int) int { return x + y }
@@ -493,7 +497,7 @@ func Demo6() {
 	fmt.Println(result2)
 }
 
-//Внешняя функция Outer
+// Внешняя функция Outer
 func Outer() func() {
 
 	//Некоторая переменная - лексическое окружение функции inner
@@ -510,7 +514,7 @@ func Outer() func() {
 	return inner
 }
 
-//Еще пример замыкания
+// Еще пример замыкания
 func Multiply2(n int) func(int) int {
 	return func(m int) int { return n * m }
 }
@@ -546,8 +550,8 @@ func Indicator() {
 	fmt.Println(x) //25
 }
 
-//Пустой указатель
-//Если указателю не присвоен адрес какого-либо объекта, то его значение будет nil и лучше добавить проверку на nil
+// Пустой указатель
+// Если указателю не присвоен адрес какого-либо объекта, то его значение будет nil и лучше добавить проверку на nil
 func NilIndicator() {
 	var p *int
 
@@ -558,8 +562,8 @@ func NilIndicator() {
 	}
 }
 
-//Функция new
-//С помощью функции new(type) можно создать безымянный объект указанного типа
+// Функция new
+// С помощью функции new(type) можно создать безымянный объект указанного типа
 func NewIndicator() {
 
 	p := new(int)
@@ -568,7 +572,7 @@ func NewIndicator() {
 	fmt.Println(*p) //8
 }
 
-//Указатели на указатели
+// Указатели на указатели
 func IndOnInd() {
 
 	a := 4
@@ -582,8 +586,8 @@ func IndOnInd() {
 	fmt.Println(**pp) //4 чтобы получить значние переменной, на которую указывает pa, то надо перед указателем pp поставить **
 }
 
-//Массивы указателей
-//Можем создать массив указателей, которые содержат адрес значений одного и того же типа данных
+// Массивы указателей
+// Можем создать массив указателей, которые содержат адрес значений одного и того же типа данных
 func ArrIndicator() {
 	var a, b, c int = 1, 2, 3
 
@@ -596,7 +600,7 @@ func ArrIndicator() {
 	}
 }
 
-//Указатели как параметры функции
+// Указатели как параметры функции
 func ChangeValue(x *int) {
 	*x = (*x) * (*x)
 }
@@ -608,7 +612,7 @@ func Demo7() {
 	fmt.Println(d) //25
 }
 
-//Указатель как результат функции
+// Указатель как результат функции
 func CreatePointer(x int) *int {
 	p := new(int)
 	*p = x
@@ -625,7 +629,7 @@ func Demo8() {
 //Псевдонимы
 //Оператор type позволяет определять для типа псевдоним, при этом это не новый тип, а новое название для существующего
 
-//Для типа int определяется псидвоним mile, который основывается на типе int. По сути - это новый тип
+// Для типа int определяется псидвоним mile, который основывается на типе int. По сути - это новый тип
 type mile int
 type km int
 
@@ -654,13 +658,13 @@ type имя_структуры struct {
 
 */
 
-//Создание структуры
+// Создание структуры
 type person struct {
 	name string
 	age  int
 }
 
-//Работа с обычной структурой
+// Работа с обычной структурой
 func Demo10() {
 
 	var tom person
@@ -677,20 +681,20 @@ func Demo10() {
 
 }
 
-//Объявление анонимной структуры
+// Объявление анонимной структуры
 var tom struct {
 	name string
 	age  int
 }
 
-//Работа с анонимной структурой
+// Работа с анонимной структурой
 func Demo11() {
 	tom.name = "Tom Anon"
 	tom.age = 22
 	fmt.Println(tom) //{Tom Anon 22}
 }
 
-//Анонимные поля структуры
+// Анонимные поля структуры
 type personAnon struct {
 	string
 	int
@@ -708,7 +712,7 @@ type person struct {
 
 */
 
-//Работа с анонимными полями структуры
+// Работа с анонимными полями структуры
 func Demo12() {
 	tom := personAnon{"TomAnon", 25}
 	fmt.Println(tom) //{TomAnon 25}
@@ -722,7 +726,7 @@ type person1 struct {
 	int
 }
 
-//Работа с указателями на структуру
+// Работа с указателями на структуру
 func Demo13() {
 	tom := person1{"Tom", 24}
 
@@ -767,7 +771,7 @@ func Demo14() {
 	fmt.Println(*bob)
 }
 
-//Копирование структуры
+// Копирование структуры
 func Demo15() {
 	tom := person2{"Tom", 42}
 
@@ -793,7 +797,7 @@ func Demo16() {
 	fmt.Println(tom) // {tom 16}
 }
 
-//Сравнение структур
+// Сравнение структур
 func Demo17() {
 	tom := person2{"Tom", 17}
 	bob := person2{"Bob", 58}
@@ -878,10 +882,10 @@ func (имя_параметра тип_получателя) имя_метода
 }
 */
 
-//создаем срез из строк
+// создаем срез из строк
 type library []string
 
-//создаем метод Pring, получателем которого является срез строк library
+// создаем метод Pring, получателем которого является срез строк library
 func (l library) Print() {
 	for _, val := range l {
 		fmt.Println(val)
@@ -897,13 +901,13 @@ func Demo20() {
 
 //Методы структур
 
-//объявляем структуру
+// объявляем структуру
 type personMethod struct {
 	name string
 	age  int
 }
 
-//создаем метод и в качестве получателя указываем структуру personMethod
+// создаем метод и в качестве получателя указываем структуру personMethod
 func (p personMethod) Print() {
 	fmt.Println(p.name)
 	fmt.Println(p.age)
@@ -914,8 +918,8 @@ func Demo21() {
 	tom.Print()
 }
 
-//Методы указателей
-//Метод принимает указатель на структуру personMethod
+// Методы указателей
+// Метод принимает указатель на структуру personMethod
 func (p *personMethod) update_age(new_age int) {
 	p.age = new_age
 }
@@ -926,4 +930,271 @@ func Demo22() {
 
 	tom.update_age(44)
 	fmt.Println(tom.age)
+}
+
+//Срезы
+/*
+
+Срезы (slice) представляют последовательность элементов одного типа переменной длины.
+
+var users1 []string
+
+var users2 = []string{"Tom", "Alice", "Kate"}
+
+users3 := []string{"Tom", "Alice", "Kate"}
+*/
+
+//Оператор среза и создание среза из последовательностей
+/*
+
+Чтобы создать срез из другой последовательности применяется s[i:j]
+
+i - начальный индекс
+j - конечный индекс
+
+Если не указан начальный индекст, то по умолчанию значение будет 0, если не указан конечный индекс, то вместо него используется длина исходной последовательности
+
+*/
+
+// Назначение среза из другой последовательности
+func Demo23() {
+	arrUsers := [6]string{"Tom", "Bob", "Kate", "Alice", "Sasha", "Mike"}
+	users1 := arrUsers[2:6]
+	users2 := arrUsers[:5]
+	users3 := arrUsers[5:]
+	users4 := arrUsers[:]
+
+	fmt.Println(users1) //[Kate Alice Sasha Mike]
+	fmt.Println(users2) //[Tom Bob Kate Alice Sasha]
+	fmt.Println(users3) //[Mike]
+	fmt.Println(users4) //[Tom Bob Kate Alice Sasha Mike]
+}
+
+// Создание среза из другого среза
+func Demo24() {
+	arrUsers := [6]string{"Tom", "Bob", "Kate", "Alice", "Sasha", "Mike"}
+	users1 := arrUsers[2:6]
+	users2 := users1[3:]
+
+	fmt.Println("Slice from arr", users1)
+	fmt.Println("Slice from slice", users2)
+}
+
+// Обращение к элементам среза и перебор среза
+func Demo25() {
+	users := []string{"Tom", "Alice", "Kate"}
+
+	//Обращение к элементу среза производится через индекс
+	users[2] = "Sasha"
+
+	//перебор среза через range
+	for _, value := range users {
+		fmt.Println(value)
+	}
+}
+
+/*
+
+При инициализации среза из массива, срез ссылается на массив и при изменении элемента массива также меняется значение зреза, а при изменении элемента среза изменяет его ссылаемый массив.
+
+*/
+
+func Demo26() {
+	arrNums := [4]int{1, 2, 3, 4}
+	fmt.Println("Начальный массив", arrNums)
+
+	slice := arrNums[2:]
+	fmt.Println("Начальный срез", slice)
+
+	//Изменяем 4й элемент массива
+	arrNums[3] = 6
+	fmt.Println("Срез после изменения в массиве", slice)
+
+	//изменяем первый элемент среза
+	slice[0] = 10
+	fmt.Println("Массив после изменения в срезе", arrNums)
+}
+
+//Длина
+/*
+
+Длина - это кол-во элементов, на которые ссылается срез. Для получения длины принимается функция len().
+
+*/
+
+func Demo27() {
+	arr := [3]int{1, 2, 3}
+	slice := arr[:1]
+	fmt.Println(len(slice)) //длина среза 1 символ
+}
+
+//Емкость
+/*
+
+Емкость среза - количество элементов в базовом массиве, начиная с первого элемента среза. Грубо говоря - емкость - это на сколько срез может быть расширен. Для получения емкости вызывается функция cap()
+
+*/
+func Demo28() {
+	arr := [5]int{1, 2, 3, 4, 5}
+	slice := arr[1:4]
+	fmt.Println(cap(slice)) //4
+}
+
+//Создание среза с помощью функции make()
+
+/*
+make() - позволяет создать срез из  нескольких элементов, которые будут иметь значение по умолчанию.
+
+имя_среза := make([]тип_элемента_среза, длина_среза, емкость_среза)
+*/
+func Demo29() {
+	users := make([]int, 3)
+	users[0] = 1
+	users[1] = 2
+	users[2] = 3
+
+	fmt.Println(users) //[1 2 3]
+}
+
+//Двумерные срезы
+/*
+
+sice2D := [][] int {
+	[]int{1, 2},
+	[]int{3, 4},
+	[]int{5, 6},
+}
+
+*/
+
+//Добавление в срез
+/*
+
+Для добавления в срез применяется функция append(slice, value). Первый агрумент - срез, в который надо добавить, а второй параметр - добавляемое значение
+
+*/
+
+func Demo30() {
+	users := []string{"Tom", "Alice", "Bob"}
+	users = append(users, "Sasha")
+
+	fmt.Println(users)
+}
+
+//Удаление элемента
+/*
+
+Чтобы удалить элемент из среза необходимо использовать функцию append с указателем среза
+
+*/
+func Demo31() {
+	sliceNums := []int{1, 2, 3, 4, 5}
+	//удаляем 3й элемент
+	sliceNums = append(sliceNums[:2], sliceNums[2+1:]...)
+	fmt.Println(sliceNums)
+}
+
+//Копирование среза
+
+/*
+
+Копирование среза производится с помощью функции copy()
+
+func copy(destination, source[]T) int
+
+Первый аргумент - срез, в который копируем, второй аргумент - срез, из которого копируем. Функция возвращает целочисленное число, которое представляет количество скопированных элементов. Возвращаемое значение всегда является длиной исходного и целевого среза
+
+*/
+
+// Демонстрация копирования среза
+func Demo32() {
+	slice1 := []int{1, 2, 3, 4}
+	slice2 := []int{}
+
+	copy(slice2, slice1)
+	fmt.Println(slice2) //[], т.к. не указана размерность slice2
+
+	slice3 := make([]int, 3)
+	copy(slice3, slice1)
+	fmt.Println(slice3) //[1 2 3] - копирует 3 элемента, т.к. размерность slice3 - 3
+
+	slice4 := make([]int, 6)
+	copy(slice4, slice1)
+	fmt.Println(slice4) //[1 2 3 4 0 0] - т.к. размер slice4 больше, чем slice1, то копируются все элементы, а оставшийся размер заполняется теми, которые были до копирования
+}
+
+//Сортировка
+/*
+
+В Go есть пакет sort, который представляет несколько методов сортировки для среза:
+
+sort.Ints() - для типа int
+sort.Float64s() - для типа float64
+sort.Strings() - для типа string
+
+Эти методы сортировки всегда выводят результат в порядке возрастания
+
+Чтобы получить сортировку по убыванию необходимо использовать метод Reverse, только для начала необходимо обернуть в тип IntSlice/Float64Slice/StringSlice
+*/
+//демонстрация работы сортировки
+func Demo33() {
+	sliceInt := []int{1, 5, 3, 8}
+	sliceFloat := []float64{1.0, 7.0, 5.4, 3.9}
+	sliceString := []string{"Antony", "Lion", "Bob", "Tom"}
+
+	//Сортировка по возрастанию
+	sort.Ints(sliceInt)
+	sort.Float64s(sliceFloat)
+	sort.Strings(sliceString)
+
+	fmt.Println("Sort int", sliceInt)       //Sort int [1 3 5 8]
+	fmt.Println("Sort float", sliceFloat)   //Sort float [1 3.9 5.4 7]
+	fmt.Println("Sort string", sliceString) //Sort string [Antony Bob Lion Tom]
+
+	//Сортировка по убыванию
+	sort.Sort(sort.Reverse(sort.IntSlice(sliceInt)))
+	sort.Sort(sort.Reverse(sort.Float64Slice(sliceFloat)))
+	sort.Sort(sort.Reverse(sort.StringSlice(sliceString)))
+
+	fmt.Println("Reverse sort int", sliceInt)       //Reverse sort int [8 5 3 1]
+	fmt.Println("Reverse sort float", sliceFloat)   //Reverse sort float [7 5.4 3.9 1]
+	fmt.Println("Reverse sort string", sliceString) //Reverse sort string [Tom Lion Bob Antony]
+}
+
+//Поиск в срезе
+/*
+
+Для поиска в срезе в пакете sort имеются функции:
+
+sort.SearchInts()
+sort.SearchFloat64s()
+sort.SearchStrings()
+
+Эти функции выполняют поиск в отсортированном срезе в порядке возрастания. Если элемент найден, функция вернет его индекс, если нет, то индекс, по которому элемент будет помещен в срез
+*/
+
+func Demo34() {
+	sliceInt := []int{11, 2, 3, 78, 55}
+
+	fmt.Println(sort.SearchInts(sliceInt, 55))  //индекс 3 в отсортированном срезе
+	fmt.Println(sort.SearchInts(sliceInt, 100)) //индекс 5 - было бы записано с индексом 5
+}
+
+//Сравнение срезов
+/*
+
+Два среза считаются равными, если они хранят данные одного типа и содержат одни и те же элементы.
+
+Сравнить срезы можно с помощью функции DeepEqual() из пакета reflect
+
+*/
+
+func Demo35() {
+	slice1 := []int{1, 2, 3}
+	slice2 := []string{"Tom", "Bob"}
+	slice3 := []int{1, 2, 3}
+
+	fmt.Println("slice1 == slice2", reflect.DeepEqual(slice1, slice2)) //false
+	fmt.Println("slice1 == slice3", reflect.DeepEqual(slice1, slice3)) //true
+	fmt.Println("slice2 == slice3", reflect.DeepEqual(slice2, slice3)) //false
 }
