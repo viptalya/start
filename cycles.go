@@ -55,3 +55,13 @@ OuterLoop:
 
 	fmt.Println("Цикл завершен")
 }
+
+func EvenNubmer() {
+	arrNums := [...]int{1, 2, 3, 4, 5, 6, 7, 8, 9}
+
+	for i := 0; i < len(arrNums); i++ {
+		if arrNums[i]%2 == 0 {
+			fmt.Printf("index: %d, value: %d - четное\n", i, arrNums[i])
+		}
+	}
+}
