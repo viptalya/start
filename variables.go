@@ -7,6 +7,7 @@ func Variables() {
 	const n string = "Const c"
 
 	var a string
+
 	a = "Variable a"
 
 	var b string = "Variable b"
